@@ -8,7 +8,8 @@ import {
   Filter,
   Sparkles,
   Search,
-  Database
+  Database,
+  Plus
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { Project } from '../types';

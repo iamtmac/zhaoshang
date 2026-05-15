@@ -9,7 +9,8 @@ import {
   ArrowRight,
   ShieldCheck,
   Zap,
-  Briefcase
+  Briefcase,
+  Sparkles
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { EnterpriseLead } from '../types';
