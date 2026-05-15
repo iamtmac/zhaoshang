@@ -11,12 +11,12 @@ import {
   Zap,
   Briefcase,
   Sparkles,
-  CheckCircle2
+  CheckCircle2,
+  Database
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { EnterpriseLead } from '../types';
 import { geminiService } from '../services/geminiService';
-import { motion, AnimatePresence } from 'motion/react';
 
 const mockLeads: EnterpriseLead[] = [
   { id: '1', name: '深思考人工智能', industry: '智能语音/语义识别', location: '北京-海淀', score: 92, matchReason: '与我区“数字丝路”产业高度契合', tags: ['独角兽', '高新企业', '行业龙头'], intentLevel: 'high' },
@@ -50,7 +50,6 @@ export const EnterpriseMining: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* ... previous code ... */}
       <div className="p-8 bg-white rounded-lg border border-slate-200 shadow-sm relative overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/5 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2"></div>
         <h2 className="text-2xl font-bold text-slate-900 mb-2 font-sans tracking-tight">产业链智能挖掘</h2>
@@ -128,9 +127,9 @@ export const EnterpriseMining: React.FC = () => {
                       <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">资质实力</span>
                     </div>
                     <div className="text-[10px] space-y-1.5 text-slate-600">
-                      <p><b>注册:</b> {reports[lead.id].qualifications.capital}</p>
-                      <p><b>年限:</b> {reports[lead.id].qualifications.age}</p>
-                      <p><b>技术:</b> {reports[lead.id].qualifications.techEdge}</p>
+                      <p><b>注册:</b> {reports[lead.id]?.qualifications?.capital}</p>
+                      <p><b>年限:</b> {reports[lead.id]?.qualifications?.age}</p>
+                      <p><b>技术:</b> {reports[lead.id]?.qualifications?.techEdge}</p>
                     </div>
                   </div>
                   <div className="space-y-3">
@@ -139,9 +138,9 @@ export const EnterpriseMining: React.FC = () => {
                       <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">经营稳定性</span>
                     </div>
                     <div className="text-[10px] space-y-1.5 text-slate-600">
-                      <p><b>营收:</b> {reports[lead.id].strength.revenue}</p>
-                      <p><b>纳税:</b> {reports[lead.id].strength.taxStatus}</p>
-                      <p className="text-red-500"><b>风险:</b> {reports[lead.id].strength.risks[0]}</p>
+                      <p><b>营收:</b> {reports[lead.id]?.strength?.revenue}</p>
+                      <p><b>纳税:</b> {reports[lead.id]?.strength?.taxStatus}</p>
+                      <p className="text-red-500"><b>风险:</b> {reports[lead.id]?.strength?.risks?.[0]}</p>
                     </div>
                   </div>
                 </div>
@@ -153,23 +152,23 @@ export const EnterpriseMining: React.FC = () => {
                     <span className="text-[10px] font-bold text-blue-600">专家等级评分</span>
                   </div>
                   <div className="text-xs text-slate-700 leading-relaxed font-medium bg-white/50 p-3 rounded border border-white">
-                    {reports[lead.id].matching.gapAnalysis}
+                    {reports[lead.id]?.matching?.gapAnalysis}
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-[10px]">
                     <div className="bg-white/80 p-2 rounded">
                       <p className="text-slate-400 font-bold mb-1">投资意愿</p>
-                      <p className="text-slate-800 font-bold">{reports[lead.id].intent.expansion}</p>
+                      <p className="text-slate-800 font-bold">{reports[lead.id]?.intent?.expansion}</p>
                     </div>
                     <div className="bg-white/80 p-2 rounded">
                       <p className="text-slate-400 font-bold mb-1">用地需求</p>
-                      <p className="text-slate-800 font-bold">{reports[lead.id].matching.landUsage}</p>
+                      <p className="text-slate-800 font-bold">{reports[lead.id]?.matching?.landUsage}</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2 px-3 py-2 bg-slate-900 rounded-lg">
                   <Sparkles className="w-3 h-3 text-blue-400" />
-                  <p className="text-[10px] text-slate-300 font-bold leading-tight">{reports[lead.id].recommendation.substring(0, 50)}...</p>
+                  <p className="text-[10px] text-slate-300 font-bold leading-tight">{reports[lead.id]?.recommendation?.substring(0, 50)}...</p>
                 </div>
               </div>
             )}
@@ -201,7 +200,6 @@ export const EnterpriseMining: React.FC = () => {
           </div>
         ))}
       </div>
-
-      {/* AI Report Dropdown (Removed duplicated logic) */}    </div>
+    </div>
   );
 };
