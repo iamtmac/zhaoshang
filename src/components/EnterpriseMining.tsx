@@ -10,7 +10,8 @@ import {
   ShieldCheck,
   Zap,
   Briefcase,
-  Sparkles
+  Sparkles,
+  CheckCircle2
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { EnterpriseLead } from '../types';
@@ -27,6 +28,7 @@ export const EnterpriseMining: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [evaluatingId, setEvaluatingId] = useState<string | null>(null);
   const [reports, setReports] = useState<Record<string, any>>({});
+  const [addedLeads, setAddedLeads] = useState<Set<string>>(new Set());
 
   const handleEvaluate = async (lead: EnterpriseLead) => {
     if (reports[lead.id]) return;
@@ -36,6 +38,14 @@ export const EnterpriseMining: React.FC = () => {
       setReports(prev => ({ ...prev, [lead.id]: result }));
     }
     setEvaluatingId(null);
+  };
+
+  const handleAddToLedger = (id: string) => {
+    setAddedLeads(prev => {
+      const next = new Set(prev);
+      next.add(id);
+      return next;
+    });
   };
 
   return (
@@ -165,8 +175,27 @@ export const EnterpriseMining: React.FC = () => {
             )}
 
             <div className="mt-8 flex gap-3">
-              <button className="flex-1 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all font-black text-[10px] uppercase tracking-widest shadow-lg shadow-blue-100">
-                纳入正式项目台账
+              <button 
+                onClick={() => handleAddToLedger(lead.id)}
+                disabled={addedLeads.has(lead.id)}
+                className={cn(
+                  "flex-1 py-3 rounded-lg transition-all font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2",
+                  addedLeads.has(lead.id) 
+                    ? "bg-emerald-50 text-emerald-600 border border-emerald-200" 
+                    : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-100"
+                )}
+              >
+                {addedLeads.has(lead.id) ? (
+                  <>
+                    <CheckCircle2 className="w-4 h-4" />
+                    已纳入台账
+                  </>
+                ) : (
+                  <>
+                    <Database className="w-4 h-4" />
+                    纳入正式项目台账
+                  </>
+                )}
               </button>
             </div>
           </div>

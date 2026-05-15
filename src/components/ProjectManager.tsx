@@ -123,7 +123,12 @@ export const ProjectManager: React.FC = () => {
               </div>
               <div className="flex gap-2">
                 <button className="px-4 py-2 border border-slate-200 text-slate-600 rounded-md text-xs font-bold hover:bg-slate-50 transition-colors uppercase tracking-widest">详情</button>
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-md text-xs font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-100 uppercase tracking-widest">填报辅助</button>
+                <button 
+                  onClick={() => setShowNewModal(true)}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md text-xs font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-100 uppercase tracking-widest"
+                >
+                  填报辅助
+                </button>
               </div>
             </div>
           </div>
